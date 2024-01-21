@@ -8,6 +8,7 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 
 
+
 $dataFilePass = 'data.txt';
 
 $delimeter = ', ';
