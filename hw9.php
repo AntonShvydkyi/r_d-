@@ -3,8 +3,10 @@
 
 session_start();
 
-$email = 'email';
-$password = 'password';
+if (!empty($_POST['email']) && !empty($_POST['password'])) {
+$email = $_POST['email'];
+$password = $_POST['password'];
+
 
 $dataFilePass = 'data.txt';
 
@@ -15,6 +17,7 @@ $stringWithData = $email . $delimeter . $password;
 $fileToFill = fopen(filename: "data.txt",mode: "a+") or die("Couldn`t read the file");
 fwrite($fileToFill, $stringWithData . PHP_EOL);
 fclose($fileToFill);
+}
 
 $fileToFill = fopen(filename: "data.txt",mode: "w+") or die("Couldn`t read the file");
 fclose($fileToFill);
@@ -22,7 +25,7 @@ fclose($fileToFill);
 $valueToDelete = 'John Smith';
 $fileContent = file_get_contents("data.txt");
 $newContent = str_replace($valueToDelete, '', $fileContent);
-fwrite("data.txt", $newContent);
+file_put_contents("data.txt", $newContent);
 echo 'Значання John Smith видалено з файлу'
 
 ?>
