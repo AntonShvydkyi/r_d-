@@ -25,7 +25,6 @@ $con = mysqli_connect($host, $username, $password, $dbName);
         $_SESSION['email'] = $email;
     }
 }
-
      if (isset($_GET['logout'])) {
          session_destroy();
          header('Location: index.php');
