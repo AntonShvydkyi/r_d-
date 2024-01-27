@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <?php
 
-
-// Підключення до бази даних
 $host = 'localhost';
 $username = 'root';
 $password = 'root';
@@ -23,7 +21,6 @@ $con = mysqli_connect($host, $username, $password, $dbName);
     $result = $con->query($query);
 
     if ($result->num_rows > 0) {
-        // Користувача знайдено, встановлення сесії
         $_SESSION['is_auth'] = true;
         $_SESSION['email'] = $email;
     }
