@@ -12,7 +12,6 @@ $con = mysqli_connect($host, $username, $password, $dbName);
     die("Connection failed: " . $con->connect_error);
 }
 
-
     if (!empty($_POST['email']) && !empty($_POST['password'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
