@@ -71,7 +71,7 @@ $pdo = null;
               data: data1,
               success: function(request) {
                   appendComment(data1.email, data1.new_message);
-                  $(this).trigger("reset");
+                  $("newMessage").trigger("reset");
               }
               //success: function(request) {
                   //console.log('here');
@@ -90,11 +90,11 @@ $pdo = null;
 </head>
 <body>
 <div class="container">
-    <div class="container"
-
+    <div class="card">
          <div class="card"
+        <div class="card-header">
               Чат
-         </div>
+        </div>
 <ul class="list-group list-group-flush" id="saveMessage">
 
 </ul>
