@@ -38,8 +38,23 @@ function sortUsingBubble(array $array): array
     }
     return $array;
 }
+
+function findMinValue($array)
+{
+    $minValue = $array[0];
+    foreach ($array as $value) {
+        if ($value < $minValue) {
+            $minValue = $value;
+        }
+    }
+    return $minValue;
+}
+
 showArray($unsorted);
 
 $sorted = sortUsingBubble($unsorted);
 
 showArray($sorted);
+
+$minValue = findMinValue($unsorted);
+echo "Minimum value in the array: $minValue" . PHP_EOL;
