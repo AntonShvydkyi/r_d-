@@ -46,4 +46,5 @@ echo "Sorted array: ";
 showArray($sorted);
 
 $minValue = findMinValue($unsorted);
+
 echo "Minimum value in the array: $minValue";
