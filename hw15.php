@@ -1,4 +1,3 @@
-
 <?php
 
 $unsorted = [39, 32, 56, 2, 76, 5, 89, 49, 21, 44];
@@ -6,39 +5,28 @@ $unsorted = [39, 32, 56, 2, 76, 5, 89, 49, 21, 44];
 function showArray($array)
 {
     $arrayInString = '[' . implode(', ', $array) . ']';
-
     echo $arrayInString . PHP_EOL;
 }
 
-function sortUsingBubble(array $array): array
+function sortUsingQuick(array $array): array
 {
-    for($i = count($array) - 1; $i > 0; $i--){
-        $isSwapped = false;
-        for($j = 0; $j < $i; $j++) {
+    if (count($array) <= 1) {
+        return $array;
+    }
 
-            $currentElement = $array[$j];
-            $nextElement    = $array[$j + 1];
+    $pivot = $array[0];
+    $left = $right = [];
 
-            if ($currentElement > $nextElement) {
-                $temp = $currentElement;
-
-                $array[$j]     = $nextElement;
-                $array[$j + 1] = $temp;
-
-                $isSwapped = true;
-            }
-
-
-
-            showArray($array);
-        }
-        if (!$isSwapped) {
-            break;
+    for ($i = 1; $i < count($array); $i++) {
+        if ($array[$i] < $pivot) {
+            $left[] = $array[$i];
+        } else {
+            $right[] = $array[$i];
         }
     }
-    return $array;
-}
 
+    return array_merge(sortUsingQuick($left), [$pivot], sortUsingQuick($right));
+}
 function findMinValue($array)
 {
     $minValue = $array[0];
@@ -49,12 +37,14 @@ function findMinValue($array)
     }
     return $minValue;
 }
-
+echo "Unsorted array: ";
 showArray($unsorted);
 
-$sorted = sortUsingBubble($unsorted);
+$sorted = sortUsingQuick($unsorted);
 
+echo "Sorted array: ";
 showArray($sorted);
 
 $minValue = findMinValue($unsorted);
-echo "Minimum value in the array: $minValue" . PHP_EOL;
+
+echo "Minimum value in the array: $minValue";
