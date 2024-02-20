@@ -9,10 +9,12 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
-    $result = $pdo->query($query);
+    $query = "SELECT * FROM users WHERE email = :email AND password = :password";
+    $stmt = $pdo->prepare($query);
+    $stmt = execute(['email' => $email, 'password' => $password]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     session_start();
-    if ($result->num_rows > 0) {
+    if ($result) {
         $_SESSION['is_auth'] = true;
         $_SESSION['email'] = $email;
     }
@@ -29,11 +31,10 @@ if ($isAuthorized && !empty($_POST['new_message'])) {
     $newMessage = $_POST['new_message'];
 
 
-    $insertQuery = "INSERT INTO messages (name, massage) VALUES ('$email', '$newMessage')";
-    $pdo->query($insertQuery);
+    $insertQuery = "INSERT INTO messages (name, massage) VALUES (:email, :newMessage)";
+    $stmt = $pdo->prepare($insertQuery);
+    $stmt->execute(['email' => $email, 'newMessage' => $newMessage]);
 }
-
-
 
 $messages = getAllMessages($pdo);
 

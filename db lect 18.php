@@ -22,13 +22,35 @@ function showAndDie($something)
     die();
 
 }
-function getAllMessages(PDO $pdo): array {
+function getAllMessages(PDO $pdo) : array {
     $data = [];
-    $sql = "SELECT * FROM messages";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sql = "select * from messages";
+    $result = $pdo->query($sql)->setFetchMode(PDO::FETCH_ASSOC);
+    while ($row = $result->fetch()) {
+        $data[] = $row;
+    }
     return $data;
+}
+
+function addNewMessage(PDO $pdo, string $name, string $message)
+{
+    $sql = "INSERT INTO messages (name, message) VALUES (:name, :message)";
+    $result = $pdo->prepare($sql);
+    $params = compact('name', 'message');
+
+    if (!$result->execute($params)) {
+        echo 'Someting went wrong';
+    }
+}
+
+function deleteMessage($pdo, $id)
+{
+    $sql = "DELETE FROM messages WHERE id=:id";
+    $result = $pdo->prerare($sql);
+
+    if (!$result->execute(['id' => $id])){
+        echo 'Someting went wrong';
+    }
 }
 
 
