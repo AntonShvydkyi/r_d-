@@ -19,6 +19,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
         $_SESSION['email'] = $email;
     }
 }
+
 if (isset($_GET['logout'])) {
     session_destroy();
     header('Location: index.php');

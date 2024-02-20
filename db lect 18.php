@@ -21,6 +21,7 @@ function showAndDie($something)
     echo '</pre>';
     die();
 
+
 }
 function getAllMessages(PDO $pdo) : array {
     $data = [];
