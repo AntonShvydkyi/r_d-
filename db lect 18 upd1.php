@@ -1,6 +1,5 @@
 <?php
 
-
 function getPDO(): PDO
 {
     $host = 'localhost';
