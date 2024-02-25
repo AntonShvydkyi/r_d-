@@ -3,7 +3,6 @@
 
 require_once ('db.php');
 
-
 $pdo = getPDO();
 
 if (!empty($_POST['email']) && !empty($_POST['password'])) {
